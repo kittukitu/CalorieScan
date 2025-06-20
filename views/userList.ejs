@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100">
+    <!-- Navbar -->
+     <!-- Navigation Bar -->
+     <nav class="p-4 text-white bg-green-500">
+        <div class="container flex items-center justify-between mx-auto">
+            <h1 class="text-xl font-bold">CalorieScan</h1>
+            <ul class="flex items-center space-x-4">
+                <li><a href="/dashboard" class="hover:text-gray-200">Home</a></li>
+                <li><a href="/profile" class="hover:text-gray-200">Profile</a></li>
+                <li><a href="/about" class="hover:text-gray-200">About</a></li>
+                <li><a href="/settings" class="hover:text-gray-200">Settings</a></li>
+                <% if (user && user.role === 'admin') { %>
+                    <li><a href="/admin/users" class="hover:text-gray-200">Admin</a></li>
+                <% } %>
+                
+                <li>
+                <li>
+                    <a href="/logout" class="inline-block px-4 py-2 ml-4 transition duration-200 bg-red-500 rounded-lg hover:bg-red-600">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- User List -->
+    <div class="container flex-grow p-4 mx-auto my-8">
+        <h1 class="mb-4 text-2xl font-bold">User List</h1>
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <% users.forEach(user => { %>
+                <div class="p-6 text-center bg-white rounded-lg shadow-lg">
+                    <h2 class="mb-2 text-lg font-semibold"><%= user.name %></h2>
+                    <p class="mb-2 text-gray-600">Email: <%= user.email %></p>
+                    <p class="mb-2 text-gray-600">Phone: <%= user.phone %></p>
+                    <p class="mb-4 text-gray-600">Role: <%= user.role %></p>
+                    <div class="flex justify-center space-x-2">
+                        <!-- Make Admin Button -->
+                        <% if (user.role !== 'admin') { %>
+                            <form action="/admin/make-admin/<%= user.id %>" method="POST">
+                                <button type="submit" class="px-3 py-1 text-white bg-indigo-500 rounded-lg hover:bg-indigo-600">Make Admin</button>
+                            </form>
+                        <% } %>
+                        <!-- Delete Button -->
+                        <form action="/admin/delete-user/<%= user.id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                            <button type="submit" class="px-3 py-1 text-white bg-red-500 rounded-lg hover:bg-red-600">Delete</button>
+                        </form>
+                        <!-- New View Button -->
+
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-4 text-white bg-green-500">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 CalorieScan. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

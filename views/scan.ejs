@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Navigation Bar -->
+    <nav class="p-4 text-white bg-green-500">
+        <div class="container flex items-center justify-between mx-auto">
+            <h1 class="text-xl font-bold">CalorieScan</h1>
+            <ul class="flex items-center space-x-4">
+                <li><a href="/dashboard" class="hover:text-gray-200">Home</a></li>
+                <li><a href="/profile" class="hover:text-gray-200">Profile</a></li>
+                <li><a href="/about" class="hover:text-gray-200">About</a></li>
+                <li><a href="/scan" class="hover:text-gray-200">Scan</a></li>
+                <li><a href="/settings" class="hover:text-gray-200">Settings</a></li>
+                <% if (user && user.role === 'admin') { %>
+                    <li><a href="/admin/users" class="hover:text-gray-200">Admin</a></li>
+                <% } %>
+                <li>
+                    <a href="/logout" class="inline-block px-4 py-2 ml-4 transition duration-200 bg-red-500 rounded-lg hover:bg-red-600">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-6">
+        <h1 class="text-2xl font-bold">Food Image Scanner</h1>
+        
+        <form action="/scan" method="POST" enctype="multipart/form-data" class="mt-4">
+            <input type="file" id="fileInput" name="foodImage" accept="image/*" required class="block mb-4">
+            <button type="button" onclick="openCamera()" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Open Camera</button>
+            <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 ml-2">Scan Image</button>
+        </form>
+        
+        <video id="camera" class="mt-4 hidden" autoplay></video>
+        <canvas id="canvas" class="hidden"></canvas>
+        <button id="captureButton" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 mt-2 hidden">Capture</button>
+        
+        <% if (nutritionData) { %>
+        <div class="mt-6 bg-white p-4 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold">Estimated Nutritional Values</h2>
+            <p><strong>Calories:</strong> <%= nutritionData.calories %> kcal</p>
+            <p><strong>Carbohydrates:</strong> <%= nutritionData.carbohydrates %> g</p>
+            <p><strong>Fat:</strong> <%= nutritionData.fat %> g</p>
+        </div>
+        <% } %>
+    </div>
+
+    <script>
+        function openCamera() {
+            const video = document.getElementById('camera');
+            const captureButton = document.getElementById('captureButton');
+            video.classList.remove('hidden');
+            captureButton.classList.remove('hidden');
+            
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                })
+                .catch(err => {
+                    console.error('Error accessing camera:', err);
+                });
+        }
+
+        document.getElementById('captureButton').addEventListener('click', function() {
+            const video = document.getElementById('camera');
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            canvas.toBlob(blob => {
+                const file = new File([blob], 'captured_image.png', { type: 'image/png' });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                document.getElementById('fileInput').files = dataTransfer.files;
+            });
+        });
+    </script>
+
+</body>
+
+</html>

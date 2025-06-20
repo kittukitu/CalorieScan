@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About CalorieScan</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100">
+    <!-- Navbar -->
+    <nav class="p-4 text-white bg-green-500">
+        <div class="container flex items-center justify-between mx-auto">
+            <h1 class="text-2xl font-bold">CalorieScan</h1>
+            <ul class="flex items-center space-x-6 text-lg">
+                <li><a href="/dashboard" class="hover:text-gray-200">Home</a></li>
+                <li><a href="/profile" class="hover:text-gray-200">Profile</a></li>
+                <li><a href="/settings" class="hover:text-gray-200">Settings</a></li>
+                <li><a href="/about" class="font-semibold hover:text-gray-200">About</a></li>
+                <li><a href="/logout" class="px-4 py-2 ml-4 transition bg-red-500 rounded-lg hover:bg-red-600">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <div class="container flex-grow p-8 mx-auto">
+        <h1 class="mb-6 text-4xl font-bold text-center text-green-600">About CalorieScan</h1>
+        
+        <!-- About Description -->
+        <div class="p-6 mb-6 bg-white rounded-lg shadow-lg">
+            <p class="text-lg text-gray-700">
+                CalorieScan is an **AI-powered food recognition and calorie tracking** application. 
+                Our mission is to simplify nutrition tracking by leveraging AI technology to analyze food items from images and manual entries.
+            </p>
+            <p class="mt-4 text-lg text-gray-700">
+                Whether you’re **losing weight, gaining muscle, or maintaining a balanced diet,** 
+                CalorieScan provides the insights you need to track your food intake effortlessly.
+            </p>
+        </div>
+
+        <!-- Features Section -->
+        <h2 class="mb-4 text-3xl font-semibold text-center text-gray-800">Key Features</h2>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="p-6 bg-white rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold text-green-600">AI-Based Food Recognition</h3>
+                <p class="mt-2 text-gray-700">Snap a photo of your meal, and our AI detects the food and provides calorie estimates instantly.</p>
+            </div>
+            <div class="p-6 bg-white rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold text-green-600">Calorie & Macronutrient Tracking</h3>
+                <p class="mt-2 text-gray-700">Get insights into calories, proteins, fats, and carbs for a healthier lifestyle.</p>
+            </div>
+            <div class="p-6 bg-white rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold text-green-600">Personalized Meal Recommendations</h3>
+                <p class="mt-2 text-gray-700">Receive customized food suggestions based on your dietary preferences and goals.</p>
+            </div>
+            <div class="p-6 bg-white rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold text-green-600">Easy-to-Use Dashboard</h3>
+                <p class="mt-2 text-gray-700">Track your daily intake effortlessly with a user-friendly interface.</p>
+            </div>
+            <div class="p-6 bg-white rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold text-green-600">Water & Exercise Tracking</h3>
+                <p class="mt-2 text-gray-700">Log your daily water intake and workouts for better health insights.</p>
+            </div>
+            <div class="p-6 bg-white rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold text-green-600">AI-Powered Meal Planning</h3>
+                <p class="mt-2 text-gray-700">Plan meals in advance with smart AI suggestions based on your nutrition needs.</p>
+            </div>
+        </div>
+
+        <!-- Healthy vs. Unhealthy Food -->
+        <h2 class="mt-12 mb-4 text-3xl font-semibold text-center text-gray-800">Healthy vs. Unhealthy Foods</h2>
+        <div class="grid gap-6 sm:grid-cols-2">
+            <!-- Healthy Foods -->
+            <div class="p-6 bg-white rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold text-green-600">Best Foods to Eat</h3>
+                <ul class="mt-4 text-lg text-gray-700 list-disc list-inside">
+                    <li>Leafy greens (Spinach, Kale, Lettuce)</li>
+                    <li>Lean proteins (Chicken, Fish, Tofu)</li>
+                    <li>Whole grains (Brown rice, Quinoa, Oats)</li>
+                    <li>Fruits (Berries, Apples, Bananas)</li>
+                    <li>Healthy fats (Avocados, Nuts, Olive oil)</li>
+                </ul>
+            </div>
+
+            <!-- Unhealthy Foods -->
+            <div class="p-6 bg-white rounded-lg shadow-lg">
+                <h3 class="text-2xl font-semibold text-red-600">Foods to Avoid</h3>
+                <ul class="mt-4 text-lg text-gray-700 list-disc list-inside">
+                    <li>Sugary drinks (Soda, Energy drinks)</li>
+                    <li>Processed meats (Bacon, Sausages)</li>
+                    <li>Fast food (Burgers, Fries, Pizza)</li>
+                    <li>Artificial trans fats (Fried foods, Packaged snacks)</li>
+                    <li>High-sugar snacks (Cookies, Cakes, Candies)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Section -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            alert("Welcome to CalorieScan! Discover how to eat healthily.");
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="py-6 mt-12 text-white bg-green-500">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 CalorieScan. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
