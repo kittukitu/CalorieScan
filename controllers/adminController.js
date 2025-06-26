@@ -31,15 +31,24 @@ exports.makeAdmin = (req, res) => {
 
 
 
+
 // Delete a user
 exports.deleteUser = (req, res) => {
     const userId = req.params.id;
-    const sql = `DELETE FROM users WHERE id = ?`;
-    db.execute(sql, [userId], (err) => {
-        if (err) return res.status(500).send('Database error');
-        res.redirect('/admin/users');
+
+    const deleteFoodSql = `DELETE FROM food_items WHERE user_id = ?`;
+    const deleteUserSql = `DELETE FROM users WHERE id = ?`;
+
+    db.execute(deleteFoodSql, [userId], (err) => {
+        if (err) return res.status(500).send('Error deleting food items');
+
+        db.execute(deleteUserSql, [userId], (err) => {
+            if (err) return res.status(500).send('Database error');
+            res.redirect('/admin/users');
+        });
     });
 };
+
 
 exports.resetPassword = (req, res) => {
     const userId = req.params.id;
